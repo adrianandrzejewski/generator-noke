@@ -1,0 +1,87 @@
+// Path to css3pie
+$pie-path: '/css/PIE.htc';
+
+// Breakpoints
+$extra-small: 480px;
+$small: 600px;
+$medium: 800px;
+$large: 980px;
+
+//Configure media queries
+// To enable support for browsers that do not support @media queries,
+// (IE <= 8, Firefox <= 3, Opera <= 9) set $mq-responsive to false
+// Create a separate stylesheet served exclusively to these browsers,
+// meaning @media queries will be rasterized, relying on the cascade itself
+$mq-responsive: true;
+
+// Don't change 4 default breakpoints (extra-small, small, medium, large).
+// You can add new if needed.
+$mq-breakpoints: (
+    extra-small:  $extra-small,
+    small:  $small,
+    medium: $medium,
+    large: $large,
+);
+
+// Define the breakpoint from the $mq-breakpoints list that should
+// be used as the target width when outputting a static stylesheet
+// (i.e. when $mq-responsive is set to 'false').
+$mq-static-breakpoint: large;
+
+// If you want to display the currently active breakpoint in the top
+// right corner of your site during development, add the breakpoints
+// to this list, ordered by width, e.g. (extra-small, small, medium, large).
+$mq-show-breakpoints: ();
+
+// Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width: 30px;
+
+/// Customize the media type (e.g. `@media screen` or `@media print`)
+/// By default sass-mq uses an "all" media type (`@media all and …`)
+///
+/// @type String
+/// @link https://github.com/sass-mq/sass-mq#changing-media-type Full documentation and examples
+$mq-media-type: print, screen;
+
+// Margin helpers class
+$margin-left: false;
+$margin-left-range: 10;
+$margin-left-minus: false;
+$margin-left-minus-range: 10;
+
+$margin-right: false;
+$margin-right-range: 10;
+$margin-right-minus: false;
+$margin-right-minus-range: 10;
+
+$margin-top: false;
+$margin-top-range: 10;
+$margin-top-minus: false;
+$margin-top-minus-range: 10;
+
+$margin-bottom: false;
+$margin-bottom-range: 10;
+$margin-bottom-minus: false;
+$margin-bottom-minus-range: 10;
+
+// Padding helpers class
+$padding-left: false;
+$padding-left-range: 10;
+$padding-left-minus: false;
+$padding-left-minus-range: 10;
+
+$padding-right: false;
+$padding-right-range: 10;
+$padding-right-minus: false;
+$padding-right-minus-range: 10;
+
+$padding-top: false;
+$padding-top-range: 10;
+$padding-top-minus: false;
+$padding-top-minus-range: 10;
+
+$padding-bottom: false;
+$padding-bottom-range: 10;
+$padding-bottom-minus: false;
+$padding-bottom-minus-range: 10;
+

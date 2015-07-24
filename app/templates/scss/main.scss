@@ -1,0 +1,32 @@
+/*----------------------------------------*\
+    #Noke - SCSS starter kit
+\*----------------------------------------*/
+@import 'kiki-settings';
+
+// bower:scss
+// endbower
+
+//normalize
+@import 'base/normalize';
+
+//utils
+@import 'utils/variables';
+@import 'utils/helpers';
+@import 'utils/mixins';
+
+//base
+@import 'base/base';
+@import 'base/typography';
+
+//layout
+@import 'layout/navigation';
+@import 'layout/header';
+@import 'layout/footer';
+
+//components
+
+
+//pages
+
+//shame
+@import 'shame';
