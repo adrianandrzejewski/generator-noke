@@ -20,7 +20,13 @@
     ];
 
     return <% if (includeNodeSass) { %>gulp.src('scss/')
-      .pipe($.sass({errLogToConsole: true})) <% } else { %>$.rubySass('scss/main.scss') <% } %>
+      .pipe($.sass({errLogToConsole: true})) <% } else { %>$.rubySass('scss/main.scss')
+      .pipe($.plumber({
+        errorHandler: function (err) {
+            console.log(err);
+            this.emit('end');
+        }
+      }))<% } %>
       .pipe($.postcss(processors))
       .pipe($.minifyCss())
       .pipe($.rename({suffix: '.min'}))
