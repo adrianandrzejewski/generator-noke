@@ -132,9 +132,19 @@ module.exports = generators.Base.extend({
 
     images: function () {
       mkdirp('images');
+    },
+
+    sprite: function () {
       if (this.includeSprite) {
         mkdirp('images/sprite');
       }
+      this.fs.copyTpl(
+        this.templatePath('scss/main.scss'),
+        this.destinationPath('scss/main.scss'),
+        {
+          includeSprite: this.includeSprite
+        }
+      );
     }
   },
 
