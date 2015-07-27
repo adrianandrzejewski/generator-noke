@@ -4,11 +4,16 @@
 /*------------------------------------*\
  #CSS STYLES TASKS
 \*------------------------------------*/
+
+import browserSync from 'browser-sync';
+
   var gulp = require('gulp'),
       autoprefixer = require('autoprefixer-core'),
       mqpacker = require('css-mqpacker'),
       opacity = require('postcss-opacity'),
       pixrem = require('pixrem'),
+      wiredep = require('wiredep').stream,
+      reload = browserSync.reload,
       $ = require('gulp-load-plugins')();
 
   gulp.task('styles', function () {
@@ -19,8 +24,8 @@
       pixrem
     ];
 
-    return <% if (includeNodeSass) { %>gulp.src('scss/')
-      .pipe($.sass({errLogToConsole: true})) <% } else { %>$.rubySass('scss/main.scss')
+    return <% if (includeNodeSass) { %>gulp.src('scss/main.scss')
+      .pipe($.sass({errLogToConsole: true})) <% } else { %>$.rubySass('scss')
       .pipe($.plumber({
         errorHandler: function (err) {
             console.log(err);
@@ -30,6 +35,7 @@
       .pipe($.postcss(processors))
       .pipe($.minifyCss())
       .pipe($.rename({suffix: '.min'}))
+      .pipe(reload({stream: true}))
       .pipe($.size({showFiles: true}))
       .on('error', console.error.bind(console))
       .pipe(gulp.dest('css'));
@@ -49,6 +55,22 @@
   });<% } %>
 
   gulp.task('dev', function () {
+    browserSync({
+      notify: false,
+      port: 9000,
+      server: {
+        baseDir: "./",
+        routes: {
+          '/bower_components': 'bower_components'
+        }
+      }
+    });
+
+    gulp.watch([
+      '*.html',
+      'images/**/*',
+    ]).on('change', reload);
+  
     gulp.watch(['scss/**/*.{css,scss}'], ['styles']); <% if (includeSprite) { %> 
     gulp.watch(['images/sprite/**/*'], ['sprite']); <% } %>
   });

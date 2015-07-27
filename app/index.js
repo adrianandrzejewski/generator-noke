@@ -56,11 +56,25 @@ module.exports = generators.Base.extend({
         name: 'Nope, I\'ll do sprites on my own',
         value: false
       }]
+    },
+    {
+      name: "kiki",
+      type: 'list',
+      default: true,
+      message: 'Would you like to include Kiki - library of sass useful mixis?',
+      choices: [{
+        name: 'YES, YES, YES',
+        value: true
+      }, {
+        name: 'No, today I\'ll write mixins from scratch',
+        value: false
+      }]
     }];
 
     this.prompt(prompts, function (answers) {
       this.includeNodeSass = answers.nodeSass;
       this.includeSprite = answers.sprite;
+      this.includeKiki = answers.kiki;
 
       done();
     }.bind(this));
@@ -69,8 +83,8 @@ module.exports = generators.Base.extend({
   writing: {
     gulpfile: function () {
       this.fs.copyTpl(
-        this.templatePath('gulpfile.js'),
-        this.destinationPath('gulpfile.js'),
+        this.templatePath('gulpfile.babel.js'),
+        this.destinationPath('gulpfile.babel.js'),
         {
           includeNodeSass: this.includeNodeSass,
           includeSprite: this.includeSprite
@@ -108,11 +122,14 @@ module.exports = generators.Base.extend({
         }
       };
 
-      this.fs.writeJSON('bower.json', bowerJson);
-      this.fs.copy(
-        this.templatePath('bowerrc'),
-        this.destinationPath('.bowerrc')
-      );
+      if(this.includeKiki) {
+        this.fs.writeJSON('bower.json', bowerJson);
+        this.fs.copy(
+          this.templatePath('bowerrc'),
+          this.destinationPath('.bowerrc')
+        );
+      }
+      
     },
 
     editorConfig: function () {
@@ -128,6 +145,14 @@ module.exports = generators.Base.extend({
         this.templatePath('scss'),
         this.destinationPath('scss')
       );
+      this.fs.copyTpl(
+        this.templatePath('scss/main.scss'),
+        this.destinationPath('scss/main.scss'),
+        {
+          includeSprite: this.includeSprite,
+          includeKiki: this.includeKiki,
+        }
+      );
     },
 
     images: function () {
@@ -138,20 +163,15 @@ module.exports = generators.Base.extend({
       if (this.includeSprite) {
         mkdirp('images/sprite');
       }
-      this.fs.copyTpl(
-        this.templatePath('scss/main.scss'),
-        this.destinationPath('scss/main.scss'),
-        {
-          includeSprite: this.includeSprite
-        }
-      );
     }
   },
 
   install: function () {
-    this.installDependencies({
-      skipInstall: this.options['skip-install']
-    });
+    this.npmInstall();
+
+    if (this.includeKiki) {
+      this.bowerInstall();
+    }
   },
 
   end: function () {
@@ -169,12 +189,14 @@ module.exports = generators.Base.extend({
       return;
     }
 
-    wiredep({
-      bowerJson: bowerJson,
-      directory: 'bower_components',
-      ignorePath: /^(\.\.\/)+/,
-      src: 'scss/main.scss'
-    });
+    if (this.includeKiki) {
+      wiredep({
+        bowerJson: bowerJson,
+        directory: 'bower_components',
+        ignorePath: /^(\.\.\/)+/,
+        src: 'scss/main.scss'
+      });
+    }
   }
 
 });

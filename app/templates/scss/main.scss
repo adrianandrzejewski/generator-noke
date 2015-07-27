@@ -1,11 +1,11 @@
 /*----------------------------------------*\
     #Noke - SCSS starter kit
 \*----------------------------------------*/
-@import 'kiki-settings';
+<% if (includeKiki) { %>@import 'kiki-settings';
 
 // bower:scss
 // endbower
-
+<% } %>
 //normalize
 @import 'base/normalize';
 

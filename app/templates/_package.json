@@ -4,6 +4,7 @@
     "node": ">=0.12.0"
   },
   "devDependencies": {
+    "babel-core": "^5.8.9",
     "autoprefixer-core": "^5.1.8",
     "css-mqpacker": "^3.1.0",
     "gulp": "^3.8.11",
@@ -18,6 +19,7 @@
     "gulp-size": "^1.2.1",<% if (includeSprite) { %>
     "gulp.spritesmith": "^3.5.3",<% } %>
     "pixrem": "^1.2.3",
-    "postcss-opacity": "^2.0.0"
+    "postcss-opacity": "^2.0.0",
+    "wiredep": "^3.0.0-beta"
   }
 }
