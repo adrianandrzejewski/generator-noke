@@ -1,6 +1,6 @@
 {
   "name": "generator-noke",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Gulp sass generator",
   "author": "Adrian Andrzejewski",
   "main": "app/index.js",
