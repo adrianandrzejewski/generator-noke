@@ -39,5 +39,9 @@ gulp.task('create-new-tag', (cb) => {
   };
 });
 
+gulp.task('release', () => {
+  $.runSequence('bump-version', 'generate-changelog', 'commit-changes', 'push-changes', 'create-new-tag');
+})
+
 
 
