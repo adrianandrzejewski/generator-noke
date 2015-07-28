@@ -4,10 +4,6 @@
   "description": "Gulp sass generator",
   "author": "Adrian Andrzejewski",
   "main": "app/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/andrzejewski/generator-noke.git"
-  },
   "engines": {
     "node": ">=0.10.0",
     "npm": ">=1.3"
