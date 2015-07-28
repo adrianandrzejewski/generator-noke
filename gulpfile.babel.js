@@ -34,14 +34,15 @@ gulp.task('create-new-tag', (cb) => {
     }
     $.git.push('origin', 'master', {args: '--tags'}, cb);
   });
+
   function getPackageJsonVersion () {
     return JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
-  };
+  }
 });
 
 gulp.task('release', () => {
   $.runSequence('bump-version', 'generate-changelog', 'commit-changes', 'push-changes', 'create-new-tag');
-})
+});
 
 
 
