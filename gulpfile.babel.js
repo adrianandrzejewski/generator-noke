@@ -39,11 +39,6 @@ gulp.task('create-new-tag', (cb) => {
   };
 });
 
-gulp.task('npm', (done) => {
-const spawn = require('child_process').spawn;
-  spawn('npm', ['publish'], { stdio: 'inherit' }).on('close', done);
-});
-
 gulp.task('release', () => {
   $.runSequence('bump-version', 'generate-changelog', 'commit-changes', 'push-changes', 'create-new-tag');
 })
