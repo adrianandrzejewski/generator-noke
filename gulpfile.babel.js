@@ -27,7 +27,7 @@ gulp.task('push-changes', (cb) => {
 });
 
 gulp.task('create-new-tag', (cb) => {
-  var version = getPackageJsonVersion();
+  const version = getPackageJsonVersion();
   $.git.tag(version, 'Created Tag for version: ' + version, function (error) {
     if (error) {
       return cb(error);
@@ -37,6 +37,11 @@ gulp.task('create-new-tag', (cb) => {
   function getPackageJsonVersion () {
     return JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
   };
+});
+
+gulp.task('npm', (done) => {
+const spawn = require('child_process').spawn;
+  spawn('npm', ['publish'], { stdio: 'inherit' }).on('close', done);
 });
 
 gulp.task('release', () => {
