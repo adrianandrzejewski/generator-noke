@@ -113,6 +113,13 @@ module.exports = generators.Base.extend({
         this.destinationPath('.gitattributes'));
     },
 
+    scsslint: function () {
+      this.fs.copy(
+        this.templatePath('scss-lint.yml'),
+        this.destinationPath('.scss-lint.yml')
+      );
+    },
+
     bower: function () {
       var bowerJson = {
         name: _s.slugify(this.appname),
